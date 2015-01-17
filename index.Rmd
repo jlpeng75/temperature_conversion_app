@@ -1,0 +1,63 @@
+---
+title       : Illustration of App
+subtitle    : temperature_conversion illustration
+author      : Jianling Peng 
+job         : 
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : [mathjax, quiz, bootstrap, interactive, shiny] # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+--- 
+
+## Conversion between Fahrenheitand and Celsius
+
+1. There are two different units Fahrenheitand and Celsius to measure temperature
+2. Peope may use different units for temperature
+3. It's useful to provide a tool to do the conversion between Fahrenheitand and Celsius
+4. This temperature_conversion App will make the conversion between Fahrenheitand and Celsius
+
+--- 
+
+## Formulas for the temperature conversion
+* From Fahrenheit to Celsius Conversion
+
+$$C = (F-32)\times\frac{5}{9}$$
+
+* From Celsius to Fahrenheit Conversion
+
+$$F = \frac{9}{5}\times{C} + 32$$
+
+---
+
+## Steps to use the temperature_conversion app
+  
+1. Choose the conversion types, which contains two options: "Fahrenheit to Celsius Conversion" and "Celsius to Fahrenheit Conversion", from the radio button controler.
+2. Input the temperature value from the pull-down options labeled as "inputvalue".
+3. Click the "Submit" button
+
+The converted temperature value will be shown.
+
+
+--- &interactive
+## temperature_conversion
+
+```{r opts.label = 'shiny', echo = T}
+library(shiny)
+slidifyUI(
+    sidebarPanel(
+        radioButtons("conversion", "conversion type", 
+                 choice =list("Fahrenheit to Celsius Conversion", "Celsius to Fahrenheit Conversion"), 
+                 selected = "Fahrenheit to Celsius Conversion"),
+        numericInput("inputvalue", "inputvalue", 98.6, min = -100, max = 200, step = 0.1),
+        submitButton('Submit')),
+    mainPanel(
+        h4('You entered'),
+        verbatimTextOutput("inputValue"),
+        h4('Which resulted in a conversion of '),
+        verbatimTextOutput("Conversion"))
+  )
+ ``` 
+
+
